@@ -320,6 +320,26 @@ footer{margin-top:64px;padding:22px 0 30px;border-top:1px solid var(--line);colo
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 20px}
 @media (max-width:560px){footer .wrap{flex-direction:column;align-items:center;text-align:center}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}details.acc summary::after{transition:none}}
+
+.mo{background:var(--pm-card);border:1px solid var(--pm-line);border-radius:13px;overflow:hidden;box-shadow:0 4px 14px rgba(20,30,60,.06)}
+.mo-img{position:relative;aspect-ratio:16/10;background:var(--pm-card);overflow:hidden}
+.mo-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:0;z-index:1;transition:opacity 1.5s ease}
+.mo-img img.on{opacity:1;z-index:2}
+.mo-img img.prev{opacity:1;z-index:1;transition:none}
+.mo-caps{display:none;position:relative;margin:14px 18px 0}
+.mo-caps.has{display:block}
+.mo-c{position:absolute;left:0;right:0;top:0;margin:0;max-width:none;text-align:center;font-size:.92rem;line-height:1.7;color:var(--muted);opacity:0;transition:opacity 1.5s ease}
+.mo-c.on{opacity:1}
+.mo-dots{display:flex;justify-content:center;gap:6px;padding:6px 0 8px}
+.mo-dots button{position:relative;width:28px;height:18px;padding:0;border:0;background:transparent;cursor:pointer}
+.mo-dots button::after{content:"";position:absolute;left:0;right:0;top:7px;height:4px;border-radius:2px;background:var(--calm);opacity:.35;transition:opacity .3s,background-color .3s}
+.mo-dots button.on::after{background:var(--red);opacity:1}
+.mo-dots button:focus-visible{outline:2px solid var(--red);outline-offset:1px;border-radius:4px}
+.mo-btn{margin-top:20px;text-align:center}
+.mo-go{display:inline-flex;align-items:center;gap:9px;margin-top:0;padding:10px 26px}
+.mo-go svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+:root[data-theme="dark"] .trow,:root[data-theme="dark"] .plist li{background:#212b45}
+@media (prefers-reduced-motion:reduce){.mo-img img,.mo-c{transition:none}}
 </style>
 </head>
 <body>
@@ -413,6 +433,22 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 2
       <p class="bn">সেই লক্ষ্যে ২০২৬ সালের শুরু থেকে আমরা বিভিন্ন ব্যবসায় পরীক্ষামূলক বিনিয়োগের উদ্যোগ নিয়েছি। এর অংশ হিসেবে একটি জনপ্রিয় ফ্যাশন ব্র্যান্ডের মৌসুমি প্রকল্পে আমাদের অংশগ্রহণ রয়েছে, এ ছাড়া আরও কয়েকটি ব্যবসায় আমাদের বিনিয়োগ রয়েছে।</p>
       <p class="en">With that goal, from the beginning of 2026 we have taken initiatives for pilot investments in various businesses. As part of this, we are taking part in a seasonal project of a popular fashion brand, and we also have investments in several other businesses.</p>
     </div>
+  </section>
+
+  <section id="moments">
+    <div class="head"><h2><span class="bn">মুহূর্তগুলো</span><span class="en">Moments</span></h2><p><span class="bn">আমাদের কার্যক্রম, ইভেন্ট এবং নানা আয়োজনের কিছু স্থির চিত্র। ব্যস্ততা আর সফলতার যাত্রায় তৈরি হওয়া স্মৃতির এই ফ্রেমগুলোই আমাদের পথচলার একেকটি অনুপ্রেরণা।</span><span class="en">A few still frames from our activities, events and gatherings. These frames of memory, made along a journey of busy days and success, are each a source of inspiration on our path.</span></p></div>
+    <div class="mo" id="mo">
+      <div class="mo-img">
+        <img class="on" src="moment-1.jpg" width="1440" height="900" alt="স্বপ্নছোঁয়া গ্রুপের মুহূর্ত / Shopnochoya Group moment" data-bn="" data-en="">
+        <img src="moment-2.jpg" width="1440" height="900" alt="স্বপ্নছোঁয়া গ্রুপের মুহূর্ত / Shopnochoya Group moment" loading="lazy" data-bn="" data-en="">
+        <img src="moment-3.jpg" width="1440" height="900" alt="স্বপ্নছোঁয়া গ্রুপের মুহূর্ত / Shopnochoya Group moment" loading="lazy" data-bn="" data-en="">
+        <img src="moment-4.jpg" width="1440" height="900" alt="স্বপ্নছোঁয়া গ্রুপের মুহূর্ত / Shopnochoya Group moment" loading="lazy" data-bn="" data-en="">
+        <img src="moment-5.jpg" width="1440" height="900" alt="স্বপ্নছোঁয়া গ্রুপের মুহূর্ত / Shopnochoya Group moment" loading="lazy" data-bn="" data-en="">
+      </div>
+      <div class="mo-caps" id="moCaps"></div>
+      <div class="mo-dots" id="moDots"></div>
+    </div>
+    <div class="mo-btn"><a class="btn mo-go" href="gallery.html"><span class="bn">গ্যালারি</span><span class="en">Gallery</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
   </section>
 
   <section id="team">
@@ -695,6 +731,46 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 2
     var ss=document.querySelectorAll('main section[id]');
     for(i=0;i<ss.length;i++){so.observe(ss[i]);}
   }
+})();
+</script>
+<script>
+(function(){
+  var box=document.getElementById('mo');if(!box){return;}
+  var imgs=[].slice.call(box.querySelectorAll('.mo-img img')),caps=document.getElementById('moCaps'),dots=document.getElementById('moDots');
+  var n=imgs.length,cur=0,tmr=null,vis=true,any=false,cs=[],ds=[];
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  imgs.forEach(function(im,i){
+    var b=im.getAttribute('data-bn')||'',e=im.getAttribute('data-en')||'';
+    var c=document.createElement('p');c.className='mo-c'+(i?'':' on');
+    var sb=document.createElement('span');sb.className='bn';sb.textContent=b;
+    var se=document.createElement('span');se.className='en';se.textContent=e;
+    c.appendChild(sb);c.appendChild(se);caps.appendChild(c);cs.push(c);
+    if(b||e){any=true;}
+    var d=document.createElement('button');d.type='button';d.className=i?'':'on';d.setAttribute('aria-label',(i+1)+' / '+n);
+    d.addEventListener('click',function(){go(i);if(tmr){stop();chk();}});
+    dots.appendChild(d);ds.push(d);
+  });
+  if(any){caps.classList.add('has');}
+  var fit=function(){if(!any){return;}var m=0;cs.forEach(function(c){if(c.scrollHeight>m){m=c.scrollHeight;}});caps.style.height=m+'px';};
+  fit();window.addEventListener('resize',fit);window.addEventListener('load',fit);
+  if(document.fonts&&document.fonts.ready){document.fonts.ready.then(fit);}
+  var lb=document.querySelectorAll('.lang button');
+  for(var k=0;k<lb.length;k++){lb[k].addEventListener('click',function(){setTimeout(fit,60);});}
+  function go(i){
+    if(i===cur){return;}
+    var p=imgs[cur];p.classList.remove('on');p.classList.add('prev');
+    setTimeout(function(){p.classList.remove('prev');},1600);
+    imgs[i].classList.remove('prev');imgs[i].classList.add('on');
+    cs[cur].classList.remove('on');cs[i].classList.add('on');
+    ds[cur].classList.remove('on');ds[i].classList.add('on');
+    cur=i;
+  }
+  function start(){if(tmr||reduce||n<2){return;}tmr=setInterval(function(){go((cur+1)%n);},5500);}
+  function stop(){clearInterval(tmr);tmr=null;}
+  function chk(){if(vis&&!document.hidden){start();}else{stop();}}
+  document.addEventListener('visibilitychange',chk);
+  if('IntersectionObserver' in window){new IntersectionObserver(function(es){vis=es[0].isIntersecting;chk();},{threshold:0.25}).observe(box);}
+  else{chk();}
 })();
 </script>
 </body>
