@@ -70,30 +70,43 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 2
 @media (max-width:560px){footer .wrap{flex-direction:column;align-items:center;text-align:center}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}details.acc summary::after{transition:none}}
 
-:root{--tab-b:#8d9bb8;--tab-bg:#fff;--tab-ink:#212e4b}
-:root[data-theme="dark"]{--tab-b:rgba(255,255,255,.32);--tab-bg:#212b45;--tab-ink:#eceef2}
+:root{--tab-b:#8d9bb8;--tab-bg:#fff;--tab-ink:#212e4b;--tab2-act:#212e4b}
+:root[data-theme="dark"]{--tab-b:rgba(255,255,255,.32);--tab-bg:#212b45;--tab-ink:#eceef2;--tab2-act:#3a5088}
 .top.solid{background:var(--bar-solid);box-shadow:0 6px 20px rgba(8,12,24,.22)}
 .themeb.gx{display:grid;place-items:center;width:34px;height:32px;background:transparent;border:1px solid rgba(255,255,255,.28);border-radius:7px;padding:0}
-.gmain{padding-top:92px}
-.back{display:inline-flex;align-items:center;gap:7px;margin-bottom:6px;color:var(--muted);text-decoration:none;font-size:.88rem}
-.back svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.back:hover,.back:focus-visible{color:var(--red);outline:none}
-.gmain section{padding-top:14px}
-.tabs{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 8px;margin:0 -2px 14px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+footer{padding-bottom:70px}
+.gmain{padding-top:84px}
+.gmain section{padding-top:20px}
+@keyframes gfade{from{opacity:0}to{opacity:1}}
+.js .gmain .head{animation:gfade .7s ease backwards}
+.js #tabs{animation:gfade .7s ease .15s backwards}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 6px;margin:0 -2px 8px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .tabs::-webkit-scrollbar{display:none}
+.tabs[hidden]{display:none}
+.tabs.l2,.tabs.l3{animation:gfade .4s ease}
 .tab{flex:none;font:inherit;font-size:.86rem;line-height:1.3;padding:7px 17px;border-radius:999px;border:1.5px solid var(--tab-b);background:var(--tab-bg);color:var(--tab-ink);cursor:pointer;white-space:nowrap;transition:background-color .2s,border-color .2s,color .2s}
+.tabs.l2 .tab,.tabs.l3 .tab{font-size:.78rem;padding:4px 13px}
 .tab:hover{border-color:var(--red)}
 .tab[aria-pressed="true"]{background:var(--red);border-color:var(--red);color:#fff}
+.tabs.l2 .tab[aria-pressed="true"],.tabs.l3 .tab[aria-pressed="true"]{background:var(--tab2-act);border-color:var(--tab2-act);color:#fff}
 .tab:focus-visible{outline:2px solid var(--red);outline-offset:2px}
-.gal{column-count:2;column-gap:12px;transition:opacity .25s ease}
+.gal{column-count:2;column-gap:12px;margin-top:10px}
 @media (min-width:640px){.gal{column-count:3}}
 .g{display:block;break-inside:avoid;margin:0 0 12px;border:1px solid var(--pm-line);border-radius:10px;overflow:hidden;background:var(--pm-card);transition:border-color .2s}
 .g[hidden]{display:none}
 .g img{display:block;width:100%;height:auto}
 .g:hover,.g:focus-visible{border-color:var(--red);outline:none}
-.lb{position:fixed;inset:0;z-index:100;display:none;flex-direction:column;align-items:center;background:rgba(8,12,24,.95);padding:60px 10px 74px;animation:lbin .25s ease}
+.js .g:not(.fi){opacity:0}
+.g.fi{animation:gfade .8s ease backwards;animation-delay:var(--d,0ms)}
+.empty{margin:14px 0 0;padding:38px 16px;text-align:center;color:var(--muted);font-size:.92rem;border:1px dashed var(--pm-line);border-radius:8px;max-width:none}
+.empty[hidden]{display:none}
+.fab{position:fixed;right:16px;bottom:max(16px,env(safe-area-inset-bottom));z-index:60;width:42px;height:42px;display:grid;place-items:center;border-radius:50%;background:var(--bar-solid);color:#fff;border:2px solid var(--red);box-shadow:0 8px 20px rgba(8,12,24,.35);text-decoration:none;animation:fabp 3.6s ease-out infinite;transition:background-color .2s}
+.fab svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.fab:hover,.fab:focus-visible{background:var(--red);outline:none}
+@keyframes fabp{0%{box-shadow:0 8px 20px rgba(8,12,24,.35),0 0 0 0 rgba(217,35,43,.45)}70%,100%{box-shadow:0 8px 20px rgba(8,12,24,.35),0 0 0 14px rgba(217,35,43,0)}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.lb{position:fixed;inset:0;z-index:100;display:none;flex-direction:column;align-items:center;background:rgba(8,12,24,.96);padding:60px 10px 74px;animation:gfade .25s ease}
 .lb.open{display:flex}
-@keyframes lbin{from{opacity:0}to{opacity:1}}
 .lb-st{flex:1;min-height:0;width:100%;display:flex;align-items:center;justify-content:center}
 .lb-img{max-width:100%;max-height:100%;object-fit:contain;display:block;border-radius:4px;user-select:none;-webkit-user-select:none}
 .lb-b{position:absolute;width:44px;height:44px;display:grid;place-items:center;padding:0;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.1);color:#fff;cursor:pointer}
@@ -105,7 +118,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 2
 .lb-in{position:absolute;left:0;right:0;bottom:max(14px,env(safe-area-inset-bottom));padding:0 64px;text-align:center;color:#e6eaf3;font-size:.9rem;line-height:1.6}
 .lb-cap{margin:0 auto 2px;max-width:60ch}
 .lb-cnt{color:#a0a8b8;font-size:.8rem}
-@media (prefers-reduced-motion:reduce){.gal,.tab,.g{transition:none}.lb{animation:none}}
+@media (prefers-reduced-motion:reduce){.tab,.g,.fab{transition:none}.fab{animation:none}.js .g:not(.fi){opacity:1}.g.fi,.lb,.tabs.l2,.tabs.l3,.js .gmain .head,.js #tabs{animation:none}}
 </style>
 </head>
 <body>
@@ -126,22 +139,26 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 2
 </header>
 
 <main class="wrap gmain">
-  <a class="back" href="index.html#moments"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span class="bn">হোমে ফিরুন</span><span class="en">Back to home</span></a>
   <section>
     <div class="head"><h2><span class="bn">গ্যালারি</span><span class="en">Gallery</span></h2><p><span class="bn">আমাদের কার্যক্রম, ইভেন্ট এবং নানা আয়োজনের কিছু স্থির চিত্র। ব্যস্ততা আর সফলতার যাত্রায় তৈরি হওয়া স্মৃতির এই ফ্রেমগুলোই আমাদের পথচলার একেকটি অনুপ্রেরণা।</span><span class="en">A few still frames from our activities, events and gatherings. These frames of memory, made along a journey of busy days and success, are each a source of inspiration on our path.</span></p></div>
     <div class="tabs" id="tabs"></div>
+    <div class="tabs l2" id="tabs2" hidden></div>
+    <div class="tabs l3" id="tabs3" hidden></div>
     <!--
       নতুন ছবি যোগ করতে নিচে একটি লাইন কপি করে ফাইলের নাম ও data-category বদলান।
-      data-category: eid, iftar, tour, meeting, event (নতুন ক্যাটাগরি নিচের স্ক্রিপ্টের CATS তালিকায় যোগ করুন)।
+      data-category-র মান: anniv/1, anniv/2, anniv/3, eid, tour, meeting, event/iftar/2023, event/iftar/2024, event/iftar/2025, event/iftar/2026, event/prime, event/rasana
+      (শুধু anniv বা event/iftar লিখলে ছবি ওই বিভাগের সব ট্যাবের "সব"-তে আসবে।)
       ক্যাপশন দিতে data-bn ও data-en এ লিখুন।
     -->
     <div class="gal" id="gal">
     <a class="g" href="gallery-1.jpg" data-category="meeting" data-bn="" data-en=""><img src="gallery-1-t.jpg" width="640" height="480" loading="lazy" alt="স্বপ্নছোঁয়া গ্রুপের মুহূর্ত / Shopnochoya Group moment"></a>
-    <a class="g" href="gallery-2.jpg" data-category="event" data-bn="" data-en=""><img src="gallery-2-t.jpg" width="640" height="360" loading="lazy" alt="স্বপ্নছোঁয়া গ্রুপের মুহূর্ত / Shopnochoya Group moment"></a>
+    <a class="g" href="gallery-2.jpg" data-category="event/prime" data-bn="" data-en=""><img src="gallery-2-t.jpg" width="640" height="360" loading="lazy" alt="স্বপ্নছোঁয়া গ্রুপের মুহূর্ত / Shopnochoya Group moment"></a>
     <a class="g" href="gallery-3.jpg" data-category="tour" data-bn="" data-en=""><img src="gallery-3-t.jpg" width="640" height="359" loading="lazy" alt="স্বপ্নছোঁয়া গ্রুপের মুহূর্ত / Shopnochoya Group moment"></a>
-    <a class="g" href="gallery-4.jpg" data-category="eid" data-bn="" data-en=""><img src="gallery-4-t.jpg" width="640" height="483" loading="lazy" alt="স্বপ্নছোঁয়া গ্রুপের মুহূর্ত / Shopnochoya Group moment"></a>
-    <a class="g" href="gallery-5.jpg" data-category="eid" data-bn="" data-en=""><img src="gallery-5-t.jpg" width="640" height="480" loading="lazy" alt="স্বপ্নছোঁয়া গ্রুপের মুহূর্ত / Shopnochoya Group moment"></a>
+    <a class="g" href="gallery-4.jpg" data-category="event/prime" data-bn="" data-en=""><img src="gallery-4-t.jpg" width="640" height="483" loading="lazy" alt="স্বপ্নছোঁয়া গ্রুপের মুহূর্ত / Shopnochoya Group moment"></a>
+    <a class="g" href="gallery-5.jpg" data-category="event/iftar/2024" data-bn="" data-en=""><img src="gallery-5-t.jpg" width="640" height="480" loading="lazy" alt="স্বপ্নছোঁয়া গ্রুপের মুহূর্ত / Shopnochoya Group moment"></a>
+    <a class="g" href="gallery-6.jpg" data-category="tour" data-bn="" data-en=""><img src="gallery-6-t.jpg" width="560" height="747" loading="lazy" alt="স্বপ্নছোঁয়া গ্রুপের মুহূর্ত / Shopnochoya Group moment"></a>
     </div>
+    <p class="empty" id="empty" hidden><span class="bn">এই বিভাগে শিগগিরই ছবি যোগ করা হবে।</span><span class="en">Photos will be added to this section soon.</span></p>
   </section>
 </main>
 
@@ -151,6 +168,8 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 2
     <span>Dream it · Wish it · Do it</span>
   </div>
 </footer>
+
+<a class="fab" href="index.html#moments" title="হোমে ফিরুন / Back to home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg><span class="sr"><span class="bn">হোমে ফিরুন</span><span class="en">Back to home</span></span></a>
 
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer">
   <button class="lb-b lb-x" id="lbX" type="button" aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
@@ -164,7 +183,17 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 2
 (function(){
   var root=document.documentElement,i;
   var TT={bn:'গ্যালারি · স্বপ্নছোঁয়া গ্রুপ',en:'Gallery · Shopnochoya Group'};
-  var CATS=[['eid','ঈদ','Eid'],['iftar','ইফতার','Iftar'],['tour','ট্যুর ও ভ্রমণ','Tours and travel'],['meeting','অফিসিয়াল মিটিং','Official meetings'],['event','অনুষ্ঠান','Events']];
+  var TREE=[
+    {id:'anniv',bn:'প্রতিষ্ঠা বার্ষিকী',en:'Anniversary',kids:[{id:'1',bn:'১ম',en:'1st'},{id:'2',bn:'২য়',en:'2nd'},{id:'3',bn:'৩য়',en:'3rd'}]},
+    {id:'eid',bn:'ঈদ',en:'Eid'},
+    {id:'tour',bn:'ভ্রমণ',en:'Travel'},
+    {id:'meeting',bn:'অফিসিয়াল মিটিং',en:'Official Meetings'},
+    {id:'event',bn:'আয়োজন',en:'Events',kids:[
+      {id:'iftar',bn:'ইফতার আয়োজন',en:'Iftar Gathering',kids:[{id:'2023',bn:'২০২৩',en:'2023'},{id:'2024',bn:'২০২৪',en:'2024'},{id:'2025',bn:'২০২৫',en:'2025'},{id:'2026',bn:'২০২৬',en:'2026'}]},
+      {id:'prime',bn:'প্রাইম সার্কেল লঞ্চিং',en:'Prime Circle Launch'},
+      {id:'rasana',bn:'রসনা বিলাস',en:'Rasana Bilash'}
+    ]}
+  ];
   var DG='০১২৩৪৫৬৭৮৯';
   var num=function(n){return root.lang==='bn'?String(n).replace(/\d/g,function(d){return DG.charAt(d);}):String(n);};
   var lbs=document.querySelectorAll('.lang button');
@@ -181,27 +210,60 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 2
     root.setAttribute('data-theme',n);try{localStorage.setItem('theme',n);}catch(e){}
   });}
 
-  var gal=document.getElementById('gal'),tabs=document.getElementById('tabs');
-  var items=[].slice.call(gal.querySelectorAll('.g')),cat='all',tmr=null;
-  var mk=function(id,b,e){
-    var btn=document.createElement('button');btn.type='button';btn.className='tab';btn.setAttribute('data-c',id);btn.setAttribute('aria-pressed',id===cat?'true':'false');
+  var gal=document.getElementById('gal'),emp=document.getElementById('empty');
+  var rows=[document.getElementById('tabs'),document.getElementById('tabs2'),document.getElementById('tabs3')];
+  var items=[].slice.call(gal.querySelectorAll('.g')),path=[],io=null;
+  var find=function(list,id){for(var k=0;k<list.length;k++){if(list[k].id===id){return list[k];}}return null;};
+  var listAt=function(level){
+    var list=TREE;
+    for(var k=0;k<level;k++){var nd=find(list,path[k]);if(!nd||!nd.kids){return null;}list=nd.kids;}
+    return list;
+  };
+  var mk=function(level,id,b,e,on){
+    var btn=document.createElement('button');btn.type='button';btn.className='tab';btn.setAttribute('data-c',id);btn.setAttribute('aria-pressed',on?'true':'false');
     var x=document.createElement('span');x.className='bn';x.textContent=b;
     var y=document.createElement('span');y.className='en';y.textContent=e;
     btn.appendChild(x);btn.appendChild(y);
-    btn.addEventListener('click',function(){pick(id);});
-    tabs.appendChild(btn);
+    btn.addEventListener('click',function(){choose(level,id);});
+    return btn;
   };
-  var have=function(c){return items.some(function(g){return g.getAttribute('data-category')===c;});};
-  mk('all','সবগুলো','All');
-  CATS.forEach(function(c){if(have(c[0])){mk(c[0],c[1],c[2]);}});
-  function show(){items.forEach(function(g){g.hidden=!(cat==='all'||g.getAttribute('data-category')===cat);});gal.style.opacity=1;}
-  function pick(id){
-    if(id===cat){return;}
-    cat=id;
-    var bs=tabs.querySelectorAll('.tab');
+  var buildRow=function(level){
+    var row=rows[level],list=listAt(level);row.innerHTML='';
+    if(!list){row.hidden=true;return;}
+    row.hidden=false;
+    row.appendChild(mk(level,'',level?'সব':'সবগুলো','All',path[level]===undefined));
+    list.forEach(function(nd){row.appendChild(mk(level,nd.id,nd.bn,nd.en,path[level]===nd.id));});
+  };
+  var reveal=function(){
+    var vs=items.filter(function(g){return !g.hidden;});
+    if(io){io.disconnect();}
+    if(!('IntersectionObserver' in window)){vs.forEach(function(g){g.classList.add('fi');});return;}
+    io=new IntersectionObserver(function(es){
+      var k=0;
+      es.forEach(function(e){if(e.isIntersecting){e.target.style.setProperty('--d',(k*90)+'ms');k++;e.target.classList.add('fi');io.unobserve(e.target);}});
+    },{threshold:0.06});
+    vs.forEach(function(g){io.observe(g);});
+  };
+  var filter=function(){
+    var key=path.join('/'),n=0;
+    items.forEach(function(g){
+      var c=g.getAttribute('data-category')||'';
+      var ok=!key||c===key||c.indexOf(key+'/')===0;
+      g.hidden=!ok;g.classList.remove('fi');g.style.removeProperty('--d');
+      if(ok){n++;}
+    });
+    emp.hidden=n>0;
+    reveal();
+  };
+  var choose=function(level,id){
+    path=path.slice(0,level);if(id){path.push(id);}
+    var bs=rows[level].children;
     for(var k=0;k<bs.length;k++){bs[k].setAttribute('aria-pressed',bs[k].getAttribute('data-c')===id?'true':'false');}
-    gal.style.opacity=0;clearTimeout(tmr);tmr=setTimeout(show,230);
-  }
+    for(var l=level+1;l<rows.length;l++){buildRow(l);}
+    filter();
+  };
+  for(i=0;i<rows.length;i++){buildRow(i);}
+  filter();
 
   var lb=document.getElementById('lb'),lbI=document.getElementById('lbI'),lbC=document.getElementById('lbC'),lbT=document.getElementById('lbT');
   var vis=[],idx=0,lastEl=null;

@@ -321,6 +321,8 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 2
 @media (max-width:560px){footer .wrap{flex-direction:column;align-items:center;text-align:center}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}details.acc summary::after{transition:none}}
 
+:root{--go-b:#212e4b}
+:root[data-theme="dark"]{--go-b:rgba(255,255,255,.4)}
 .mo{background:var(--pm-card);border:1px solid var(--pm-line);border-radius:13px;overflow:hidden;box-shadow:0 4px 14px rgba(20,30,60,.06)}
 .mo-img{position:relative;aspect-ratio:16/10;background:var(--pm-card);overflow:hidden}
 .mo-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:0;z-index:1;transition:opacity 1.5s ease}
@@ -335,11 +337,21 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 2
 .mo-dots button::after{content:"";position:absolute;left:0;right:0;top:7px;height:4px;border-radius:2px;background:var(--calm);opacity:.35;transition:opacity .3s,background-color .3s}
 .mo-dots button.on::after{background:var(--red);opacity:1}
 .mo-dots button:focus-visible{outline:2px solid var(--red);outline-offset:1px;border-radius:4px}
-.mo-btn{margin-top:20px;text-align:center}
-.mo-go{display:inline-flex;align-items:center;gap:9px;margin-top:0;padding:10px 26px}
-.mo-go svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.mo-go{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:space-between;padding:12px 18px;background:#212e4b;color:#fff;text-decoration:none;font-size:.88rem;font-weight:500;transition:background-color .25s ease}
+:root[data-theme="dark"] .mo-go{background:#161e2f}
+.mo-go .t{display:flex;align-items:center;gap:10px;line-height:1.6}
+html[lang="en"] .mo-go .t{font-size:.8rem;letter-spacing:.12em;text-transform:uppercase}
+.mo-go svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.mo-go .t svg{opacity:.7}
+.mo-go .a{display:flex;color:#ff5a61;animation:moNd 5s ease-in-out infinite}
+.mo-go::after{content:"";position:absolute;top:0;bottom:0;left:0;width:40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.3),transparent);transform:translateX(-130%) skewX(-18deg);animation:moSh 5s ease-in-out infinite;pointer-events:none}
+@keyframes moSh{0%{transform:translateX(-130%) skewX(-18deg)}24%,100%{transform:translateX(330%) skewX(-18deg)}}
+@keyframes moNd{0%,22%,100%{transform:translateX(0)}11%{transform:translateX(3px)}}
+.mo-go:hover,.mo-go:focus-visible{background:#2a3a5e;outline:none}
+:root[data-theme="dark"] .mo-go:hover,:root[data-theme="dark"] .mo-go:focus-visible{background:#1d2740}
+.mo.off .mo-go::after,.mo.off .mo-go .a{animation-play-state:paused}
 :root[data-theme="dark"] .trow,:root[data-theme="dark"] .plist li{background:#212b45}
-@media (prefers-reduced-motion:reduce){.mo-img img,.mo-c{transition:none}}
+@media (prefers-reduced-motion:reduce){.mo-img img,.mo-c,.mo-go{transition:none}.mo-go::after,.mo-go .a{animation:none}}
 </style>
 </head>
 <body>
@@ -447,8 +459,8 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 2
       </div>
       <div class="mo-caps" id="moCaps"></div>
       <div class="mo-dots" id="moDots"></div>
+      <a class="mo-go" href="gallery.html"><span class="t"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span class="bn">গ্যালারি</span><span class="en">Gallery</span></span><span class="a"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
     </div>
-    <div class="mo-btn"><a class="btn mo-go" href="gallery.html"><span class="bn">গ্যালারি</span><span class="en">Gallery</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
   </section>
 
   <section id="team">
@@ -684,14 +696,25 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 2
   document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeMenu();}});
   var cd=document.getElementById('cd');
   if(cd){
-    var T=new Date('2027-08-12T00:00:00+06:00').getTime(), D='০১২৩৪৫৬৭৮৯';
+    var D='০১২৩৪৫৬৭৮৯',FY=2022,cy=0;
     var toBn=function(n){return String(n).replace(/\d/g,function(d){return D.charAt(d);});};
+    var obn=function(n){var s={1:'১ম',2:'২য়',3:'৩য়',4:'৪র্থ',6:'৬ষ্ঠ'};if(s[n]){return s[n];}return n<=10?toBn(n)+'ম':toBn(n)+'তম';};
+    var oen=function(n){var v=n%100,s=['th','st','nd','rd'];return n+(s[(v-20)%10]||s[v]||s[0]);};
     var put=function(k,n){var a=cd.querySelectorAll('[data-k="'+k+'"]');a[0].textContent=toBn(n);a[1].textContent=String(n);};
+    var q=function(s,x){cd.querySelector(s).textContent=x;};
+    var nextAnn=function(now){for(var y=new Date(now).getUTCFullYear();;y++){var T=new Date(y+'-08-12T00:00:00+06:00').getTime();if(now<T+86400000){return {T:T,y:y};}}};
+    var label=function(y){
+      var n=y-FY;
+      q('.cd-t>span.bn',obn(n)+' প্রতিষ্ঠা বার্ষিকী');q('.cd-t>span.en',oen(n)+' Founding Anniversary');
+      q('.cd-t small .bn','১২ আগস্ট '+toBn(y));q('.cd-t small .en','12 August '+y);
+      q('.cd-today .bn','আজ আমাদের '+obn(n)+' প্রতিষ্ঠা বার্ষিকী');q('.cd-today .en','Today is our '+oen(n)+' founding anniversary');
+    };
     var tick=function(){
-      var now=Date.now(),diff=T-now;
-      if(diff>0){var m=Math.floor(diff/60000);put('d',Math.floor(m/1440));put('h',Math.floor(m%1440/60));put('m',m%60);cd.hidden=false;cd.classList.remove('is-today');}
-      else if(now<T+86400000){cd.hidden=false;cd.classList.add('is-today');}
-      else{cd.hidden=true;}
+      var now=Date.now(),g=nextAnn(now),diff=g.T-now;
+      if(g.y!==cy){cy=g.y;label(cy);}
+      if(diff>0){var m=Math.floor(diff/60000);put('d',Math.floor(m/1440));put('h',Math.floor(m%1440/60));put('m',m%60);cd.classList.remove('is-today');}
+      else{cd.classList.add('is-today');}
+      cd.hidden=false;
     };
     tick();setInterval(tick,30000);
   }
@@ -737,7 +760,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 2
 (function(){
   var box=document.getElementById('mo');if(!box){return;}
   var imgs=[].slice.call(box.querySelectorAll('.mo-img img')),caps=document.getElementById('moCaps'),dots=document.getElementById('moDots');
-  var n=imgs.length,cur=0,tmr=null,vis=true,any=false,cs=[],ds=[];
+  var n=imgs.length,cur=0,tmr=null,vis=true,any=false,first=true,cs=[],ds=[];
   var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
   imgs.forEach(function(im,i){
     var b=im.getAttribute('data-bn')||'',e=im.getAttribute('data-en')||'';
@@ -747,7 +770,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 2
     c.appendChild(sb);c.appendChild(se);caps.appendChild(c);cs.push(c);
     if(b||e){any=true;}
     var d=document.createElement('button');d.type='button';d.className=i?'':'on';d.setAttribute('aria-label',(i+1)+' / '+n);
-    d.addEventListener('click',function(){go(i);if(tmr){stop();chk();}});
+    d.addEventListener('click',function(){go(i);first=false;if(tmr){stop();chk();}});
     dots.appendChild(d);ds.push(d);
   });
   if(any){caps.classList.add('has');}
@@ -765,11 +788,16 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 2
     ds[cur].classList.remove('on');ds[i].classList.add('on');
     cur=i;
   }
-  function start(){if(tmr||reduce||n<2){return;}tmr=setInterval(function(){go((cur+1)%n);},5500);}
-  function stop(){clearInterval(tmr);tmr=null;}
+  var nxt=function(){go((cur+1)%n);};
+  function start(){
+    if(tmr||reduce||n<2){return;}
+    if(first){tmr=setTimeout(function(){first=false;nxt();tmr=setInterval(nxt,5500);},3000);}
+    else{tmr=setInterval(nxt,5500);}
+  }
+  function stop(){clearInterval(tmr);clearTimeout(tmr);tmr=null;}
   function chk(){if(vis&&!document.hidden){start();}else{stop();}}
   document.addEventListener('visibilitychange',chk);
-  if('IntersectionObserver' in window){new IntersectionObserver(function(es){vis=es[0].isIntersecting;chk();},{threshold:0.25}).observe(box);}
+  if('IntersectionObserver' in window){new IntersectionObserver(function(es){vis=es[0].isIntersecting;box.classList.toggle('off',!vis);chk();},{threshold:0.25}).observe(box);}
   else{chk();}
 })();
 </script>
