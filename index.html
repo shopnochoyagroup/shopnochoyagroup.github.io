@@ -338,17 +338,17 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 2
 .mo-dots button.on::after{background:var(--red);opacity:1}
 .mo-dots button:focus-visible{outline:2px solid var(--red);outline-offset:1px;border-radius:4px}
 .mo-go{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:space-between;padding:12px 18px;background:#212e4b;color:#fff;text-decoration:none;font-size:.88rem;font-weight:500;transition:background-color .25s ease}
-:root[data-theme="dark"] .mo-go{background:#161e2f}
+:root[data-theme="dark"] .mo-go{background:#2a3a63}
 .mo-go .t{display:flex;align-items:center;gap:10px;line-height:1.6}
 html[lang="en"] .mo-go .t{font-size:.8rem;letter-spacing:.12em;text-transform:uppercase}
 .mo-go svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
 .mo-go .t svg{opacity:.7}
-.mo-go .a{display:flex;color:#ff5a61;animation:moNd 5s ease-in-out infinite}
-.mo-go::after{content:"";position:absolute;top:0;bottom:0;left:0;width:40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.3),transparent);transform:translateX(-130%) skewX(-18deg);animation:moSh 5s ease-in-out infinite;pointer-events:none}
-@keyframes moSh{0%{transform:translateX(-130%) skewX(-18deg)}24%,100%{transform:translateX(330%) skewX(-18deg)}}
-@keyframes moNd{0%,22%,100%{transform:translateX(0)}11%{transform:translateX(3px)}}
+.mo-go .a{display:flex;color:#ff5a61;animation:moNd 7s ease-in-out infinite}
+.mo-go::after{content:"";position:absolute;top:0;bottom:0;left:0;width:40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.3),transparent);transform:translateX(-130%) skewX(-18deg);animation:moSh 7s ease-in-out infinite;pointer-events:none}
+@keyframes moSh{0%{transform:translateX(-130%) skewX(-18deg)}17%,100%{transform:translateX(330%) skewX(-18deg)}}
+@keyframes moNd{0%,16%,100%{transform:translateX(0)}8%{transform:translateX(3px)}}
 .mo-go:hover,.mo-go:focus-visible{background:#2a3a5e;outline:none}
-:root[data-theme="dark"] .mo-go:hover,:root[data-theme="dark"] .mo-go:focus-visible{background:#1d2740}
+:root[data-theme="dark"] .mo-go:hover,:root[data-theme="dark"] .mo-go:focus-visible{background:#324675}
 .mo.off .mo-go::after,.mo.off .mo-go .a{animation-play-state:paused}
 :root[data-theme="dark"] .trow,:root[data-theme="dark"] .plist li{background:#212b45}
 @media (prefers-reduced-motion:reduce){.mo-img img,.mo-c,.mo-go{transition:none}.mo-go::after,.mo-go .a{animation:none}}
